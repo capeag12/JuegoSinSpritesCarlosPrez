@@ -17,24 +17,42 @@ public class HiloGravedad extends Thread{
     public void run() {
         super.run();
         while(jugando == true){
-            try {
-                boolean avanzar = true;
-                for (PlataformaRect p: pantalla.getListaPlataformas()){
-                    if (jugador.getX() > p.getX() && (jugador.getX()+jugador.getWidth())<(p.getX()+p.getAnchura())
-                    && (jugador.getY()+ jugador.getHeight())>= p.getY() ){
-                        avanzar = false;
+            if (jugador.getEstado()!= Estado.SALTANDO){
+                try {
+
+                    boolean avanzar = true;
+                    for (PlataformaRect p: pantalla.getListaPlataformas()){
+                        if (jugador.getX() > p.getX() && (jugador.getX()+jugador.getWidth())<(p.getX()+p.getAnchura())
+                                && (jugador.getY()+ jugador.getHeight())>= p.getY() ){
+                            avanzar = false;
+
+                        }
+
+                    }
+                    if (avanzar==true){
+
+                        this.jugador.setVelocidadY(5);
+                        this.jugador.modificarY();
+                        sleep(15);
                     }
 
-                }
-                if (avanzar==true){
-                    this.jugador.saltar(-5);
-                    sleep(15);
-                }
 
-
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
+            else if(jugador.getEstado()==Estado.SALTANDO){
+                try {
+                    this.jugador.setVelocidadY(-10);
+                    this.jugador.modificarY();
+
+                    sleep(15);
+
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
 
         }
 

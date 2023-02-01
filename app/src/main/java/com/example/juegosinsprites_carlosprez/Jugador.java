@@ -10,29 +10,62 @@ public class Jugador extends Personaje {
     private float velocidadY = 0;
     private Estado estado;
 
+    private boolean jugando;
+
     public Jugador(float x, float y, float width, float height) {
         super(x, y, width, height);
         this.estado = Estado.PARADO;
+        jugando = true;
     }
 
     @Override
     public void moverPersonaje(float desX) {
-        if(desX > 0){
-            this.estado = Estado.MOVDerecha;
-        }
-        else{
-            this.estado = Estado.MOVIzquierda;
-        }
-
         this.setX(this.getX()+desX);
     }
 
 
     public void saltar(float salto){
-        this.estado = Estado.SALTANDO;
-        this.setY(this.getY()-salto);
+        if (this.estado!=Estado.SALTANDO){
+            this.estado = Estado.SALTANDO;
+        }
+
     }
 
+    public boolean isJugando() {
+        return jugando;
+    }
+
+    public void setJugando(boolean jugando) {
+        this.jugando = jugando;
+    }
+
+    public void modificarY(){
+        this.setY((this.getY())+velocidadY);
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public float getVelocidadX() {
+        return velocidadX;
+    }
+
+    public void setVelocidadX(float velocidadX) {
+        this.velocidadX = velocidadX;
+    }
+
+    public float getVelocidadY() {
+        return velocidadY;
+    }
+
+    public void setVelocidadY(float velocidadY) {
+        this.velocidadY = velocidadY;
+    }
 
     @Override
     public void dibujarPersonaje(Canvas c) {

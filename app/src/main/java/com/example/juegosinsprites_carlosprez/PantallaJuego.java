@@ -20,6 +20,7 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
 
     private ArrayList<PlataformaRect> listaPlataformas;
     private HiloGravedad hiloGravedad;
+    private TimerSaltando timer;
 
     public PantallaJuego(Context context) {
         super(context);
@@ -66,6 +67,7 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
 
                     if (btnSalta.estaDentro(xDedo,yDedo)){
                         jugador.saltar(200);
+
                     }
                     System.out.println(xDedo+", "+yDedo);
 
@@ -84,6 +86,10 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
                         joystick.actualizarJoyStick(xDedo,yDedo);
                         float[] des = joystick.devolverMov();
                         jugador.moverPersonaje(des[0]);
+                    }
+
+                    if (btnSalta.estaDentro(xDedo,yDedo)){
+                        jugador.saltar(200);
 
                     }
 
@@ -117,6 +123,8 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
         hilo.start();
         this.hiloGravedad = new HiloGravedad(jugador,this);
         hiloGravedad.start();
+        timer = new TimerSaltando(this.jugador);
+        timer.start();
 
     }
 
