@@ -17,7 +17,7 @@ public class HiloGravedad extends Thread{
     public void run() {
         super.run();
         while(jugando == true){
-            if (jugador.getEstado()!= Estado.SALTANDO){
+            if (jugador.getEstado()== Estado.CAYENDO){
                 try {
 
                     boolean avanzar = true;
@@ -25,7 +25,7 @@ public class HiloGravedad extends Thread{
                         if (jugador.getX() > p.getX() && (jugador.getX()+jugador.getWidth())<(p.getX()+p.getAnchura())
                                 && (jugador.getY()+ jugador.getHeight())>= p.getY() ){
                             avanzar = false;
-
+                            jugador.setEstado(Estado.PARADO);
                         }
 
                     }

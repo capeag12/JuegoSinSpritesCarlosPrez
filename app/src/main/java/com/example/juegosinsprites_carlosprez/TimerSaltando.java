@@ -16,7 +16,7 @@ public class TimerSaltando extends Thread {
             if (jugador.getEstado()==Estado.SALTANDO){
                 try {
                     sleep(400);
-                    jugador.setEstado(Estado.PARADO);
+                    jugador.setEstado(Estado.CAYENDO);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

@@ -95,9 +95,6 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
 
                 }
 
-
-
-
                 break;
             }
             case MotionEvent.ACTION_UP:{
