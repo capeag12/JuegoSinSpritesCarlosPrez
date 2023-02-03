@@ -24,7 +24,7 @@ public class Jugador extends Personaje {
     }
 
 
-    public void saltar(float salto){
+    public void saltar(){
         if (this.estado==Estado.PARADO){
             this.estado = Estado.SALTANDO;
         }

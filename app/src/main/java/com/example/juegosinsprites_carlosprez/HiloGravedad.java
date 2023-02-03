@@ -26,6 +26,7 @@ public class HiloGravedad extends Thread{
                                 && (jugador.getY()+ jugador.getHeight())>= p.getY() ){
                             avanzar = false;
                             jugador.setEstado(Estado.PARADO);
+
                         }
 
                     }
@@ -34,10 +35,9 @@ public class HiloGravedad extends Thread{
                         this.jugador.setVelocidadY(5);
                         this.jugador.modificarY();
                         sleep(15);
-                    }
-                    else{
                         jugador.setEstado(Estado.CAYENDO);
                     }
+
 
 
                 } catch (InterruptedException e) {

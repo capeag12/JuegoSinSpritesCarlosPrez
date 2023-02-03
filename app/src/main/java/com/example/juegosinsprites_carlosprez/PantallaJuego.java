@@ -66,7 +66,7 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
                     }
 
                     if (btnSalta.estaDentro(xDedo,yDedo)){
-                        jugador.saltar(200);
+                        jugador.saltar();
 
                     }
                     System.out.println(xDedo+", "+yDedo);
@@ -89,7 +89,7 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
                     }
 
                     if (btnSalta.estaDentro(xDedo,yDedo)){
-                        jugador.saltar(200);
+                        jugador.saltar();
 
                     }
 
