@@ -35,6 +35,9 @@ public class HiloGravedad extends Thread{
                         this.jugador.modificarY();
                         sleep(15);
                     }
+                    else{
+                        jugador.setEstado(Estado.CAYENDO);
+                    }
 
 
                 } catch (InterruptedException e) {

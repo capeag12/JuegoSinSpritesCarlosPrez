@@ -113,7 +113,7 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
         btnSalta = new Boton("Texto",getWidth()-400, getHeight()-300, (float) (getHeight()*0.1), Color.GREEN);
         this.joystick = new Joystick((float) (0+(getWidth()*0.1)),getHeight()-300,(float) (getHeight()*0.20));
         this.jugador = new Jugador((getWidth()/2),(getHeight()/2)-500, (float) (getWidth()*0.01), (float) (getHeight()*0.03));
-        this.listaPlataformas.add(new PlataformaRect(500,700, 700,100));
+        this.listaPlataformas.add(new PlataformaRect(500,700, 700,50));
 
         hilo = new HiloJuego(this);
         hilo.setRun(true);
