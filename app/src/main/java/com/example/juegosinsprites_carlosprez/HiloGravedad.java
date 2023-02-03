@@ -19,27 +19,20 @@ public class HiloGravedad extends Thread{
         while(jugando == true){
             if (jugador.getEstado()== Estado.CAYENDO){
                 try {
-
                     boolean avanzar = true;
                     for (PlataformaRect p: pantalla.getListaPlataformas()){
                         if (jugador.getX() > p.getX() && (jugador.getX()+jugador.getWidth())<(p.getX()+p.getAnchura())
                                 && (jugador.getY()+ jugador.getHeight())>= p.getY() ){
                             avanzar = false;
                             jugador.setEstado(Estado.PARADO);
-
                         }
-
                     }
                     if (avanzar==true){
-
                         this.jugador.setVelocidadY(5);
                         this.jugador.modificarY();
                         sleep(15);
                         jugador.setEstado(Estado.CAYENDO);
                     }
-
-
-
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -48,23 +41,15 @@ public class HiloGravedad extends Thread{
                 try {
                     this.jugador.setVelocidadY(-10);
                     this.jugador.modificarY();
-
                     sleep(15);
-
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
-
-
         }
-
     }
 
-    private boolean compararRectangulos(Rect r1, Rect r2){
-        return r1.left < r2.left+ r2.width() && r1.left + r1.width() > r2.left && r1.top < r2.top + r2.height() && r1.top + r1.height() > r2.top;
 
-    }
 
 
 }

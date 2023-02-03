@@ -31,13 +31,6 @@ public class HiloJuego extends Thread{
                 if (canvas!=null){
                     synchronized (holder){
 
-                        pantallaJuego.getJugador().dibujarPersonaje(canvas);
-                        for (Plataforma platform: pantallaJuego.getListaPlataformas()) {
-                            platform.dibujarPlataforma(canvas);
-                        }
-                        pantallaJuego.getJoystick().dibujarControl(canvas);
-                        pantallaJuego.getBtnSalta().dibujarControl(canvas);
-
                     }
                 }
             } finally {

@@ -73,4 +73,9 @@ public class Jugador extends Personaje {
         p.setColor(Color.BLUE);
         c.drawRect(new Rect((int)getX(),(int)getY(),(int)(getX()+getWidth()),(int)(getY()+getHeight())),p);
     }
+
+    public void mover(float x, float y){
+        this.setX(x);
+        this.setY(y);
+    }
 }
