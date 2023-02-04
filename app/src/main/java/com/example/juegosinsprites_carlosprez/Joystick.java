@@ -6,12 +6,14 @@ import android.graphics.Paint;
 
 public class Joystick extends Control {
     private float xCirculoDentro, yCirculoDentro, radioCirculoDentro;
+    private boolean pulsado;
 
     public Joystick(float x, float y, float radio) {
         super(x, y, radio);
         this.xCirculoDentro = this.getX();
         this.yCirculoDentro = this.getY();
         this.radioCirculoDentro = (float) (this.getRadio()/2.3);
+        pulsado = false;
     }
 
     public boolean estaDentro(float x, float y) {
@@ -26,10 +28,10 @@ public class Joystick extends Control {
     public void dibujarControl(Canvas c){
         Paint pGrande = new Paint();
         pGrande.setColor(Color.GRAY);
-
+        pGrande.setAlpha(80);
         Paint pChico = new Paint();
         pChico.setColor(Color.RED);
-
+        pChico.setAlpha(80);
         c.drawCircle(this.getX(), this.getY(), this.getRadio(), pGrande);
         c.drawCircle(this.xCirculoDentro, this.yCirculoDentro, this.radioCirculoDentro, pChico);
     }
@@ -37,14 +39,30 @@ public class Joystick extends Control {
     public float[] devolverMov(){
         float x = xCirculoDentro-this.getX() ;
         float y = yCirculoDentro-this.getY()  ;
-        float[] des = {x/10,y/10};
+        float[] des = {x/15,y/15};
         return  des;
 
     }
 
     public void actualizarJoyStick(float x, float y){
-        this.xCirculoDentro = x;
-        this.yCirculoDentro = y;
+        if (estaDentro(x,y)== false){
+
+
+        }
+        else{
+            this.xCirculoDentro = x;
+            this.yCirculoDentro = y;
+        }
+
+
+    }
+
+    public boolean isPulsado() {
+        return pulsado;
+    }
+
+    public void setPulsado(boolean pulsado) {
+        this.pulsado = pulsado;
     }
 
     @Override

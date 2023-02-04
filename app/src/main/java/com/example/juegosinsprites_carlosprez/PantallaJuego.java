@@ -19,35 +19,21 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
     private Joystick joystick;
     private HiloGravedad hiloGravedad;
     private TimerSaltando timer;
-    private Trigger trigger;
-    private ArrayList<Nivel> listaNiveles;
-    private int nivelActual;
-
-    private float xInicial;
-    private float yInicial;
-
+    private ServicioJuego servicio;
+    private ArrayList<HiloTrampa> hiloTrampas;
+    private ArrayList<HiloProyectil> hiloProyectiles;
     public PantallaJuego(Context context) {
         super(context);
         getHolder().addCallback(this);
         setBackgroundColor(Color.WHITE);
-
-        crearNiveles();
-        nivelActual = 0;
-    }
-
-    private void crearNiveles(){
-        this.listaNiveles = new ArrayList<>();
-        ArrayList<Trampa> listaTrampa = new ArrayList<>();
-        listaTrampa.add(new Trampa(1039,777,80,80,Direccion.Arriba));
-
-        ArrayList<PlataformaRect> listaPlataforma = new ArrayList<>();
-        listaPlataforma.add(new PlataformaRect(100,400, 700,50));
-        listaPlataforma.add(new PlataformaRect(1195,400, 700,50));
-        Trigger trigger = new Trigger(1788,300, 100,100);
-        listaNiveles.add(new Nivel(listaPlataforma,trigger,listaTrampa,285,378));
+        servicio = new ServicioJuego();
+        this.hiloTrampas = new ArrayList<>();
+        this.hiloProyectiles = new ArrayList<>();
 
 
     }
+
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -55,19 +41,27 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
         Paint p = new Paint();
         p.setColor(Color.WHITE);
         p.setAntiAlias(true);
-        listaNiveles.get(nivelActual).getJugador().dibujarPersonaje(canvas);
-        for (Plataforma platform: listaNiveles.get(nivelActual).getListaPlataformas()) {
+        servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador().dibujarPersonaje(canvas);
+        for (Plataforma platform: servicio.getListaNiveles().get(servicio.getNivelActual()).getListaPlataformas()) {
             platform.dibujarPlataforma(canvas);
         }
-        for (Trampa t:listaNiveles.get(nivelActual).getListaTrampas() ) {
+        for (Trampa t:servicio.getListaNiveles().get(servicio.getNivelActual()).getListaTrampas() ) {
             t.dibujarTrampa(canvas);
         }
         btnSalta.dibujarControl(canvas);
         joystick.dibujarControl(canvas);
-        listaNiveles.get(nivelActual).getTrigger().dibujarTrigger(canvas);
-        for (Proyectil proyectil:listaNiveles.get(nivelActual).getListaProyectiles()) {
+        servicio.getListaNiveles().get(servicio.getNivelActual()).getTrigger().dibujarTrigger(canvas);
+        for (Proyectil proyectil:servicio.getListaNiveles().get(servicio.getNivelActual()).getListaProyectiles()) {
             proyectil.dibujarFigura(canvas);
         }
+        String txtEliminaciones = "Veces eliminado:"+servicio.getNumCaidas();
+        Paint pTXT = new Paint();
+        pTXT.setColor(Color.BLACK);
+        pTXT.setTextSize(45);
+        canvas.drawText(txtEliminaciones,49,42,pTXT);
+
+
+
     }
 
     @Override
@@ -85,9 +79,10 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
                     float yDedo = event.getY(i);
                     if (joystick.estaDentro(xDedo,yDedo)){
                         joystick.actualizarJoyStick(xDedo,yDedo);
+                        joystick.setPulsado(true);
                     }
                     if (btnSalta.estaDentro(xDedo,yDedo)){
-                        listaNiveles.get(nivelActual).getJugador().saltar();
+                        servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador().saltar();
                     }
                     System.out.println(xDedo+", "+yDedo);
                 }
@@ -97,27 +92,52 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
                 for(int i=0; i<countDedos; i++){
                     float xDedo = event.getX(i);
                     float yDedo = event.getY(i);
-                    if (joystick.estaDentro(xDedo,yDedo)){
+                    if (joystick.isPulsado()==true){
                         joystick.actualizarJoyStick(xDedo,yDedo);
+                        joystick.setPulsado(true);
                         float[] des = joystick.devolverMov();
-                        listaNiveles.get(nivelActual).getJugador().moverPersonaje(des[0]);
-
-                        if (listaNiveles.get(nivelActual).getTrigger().puntoAlcanzado(listaNiveles.get(nivelActual).getJugador().getX(), listaNiveles.get(nivelActual).getJugador().getY(),listaNiveles.get(nivelActual).getJugador().getWidth())){
+                        synchronized (servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador()){
+                            servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador().cambiarVelX(des[0]);
+                        }
+                        if (servicio.getListaNiveles().get(servicio.getNivelActual()).getTrigger().puntoAlcanzado(servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador().getX(), servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador().getY(),servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador().getWidth())){
                             System.out.println("Has llegado al trigger");
+                            for (HiloTrampa hilo:hiloTrampas) {
+                                hilo.continuar = false;
+                            }
+
+                            hiloTrampas.clear();
+
+                            for (HiloProyectil hilo:hiloProyectiles) {
+                                hilo.continuar = false;
+                            }
+                            hiloProyectiles.clear();
+
+
+
+
+                            this.servicio.pasarNivel();
+                            for (Trampa t: servicio.getListaNiveles().get(servicio.getNivelActual()).getListaTrampas()) {
+                                HiloTrampa hilo = new HiloTrampa(t,this);
+                                hiloTrampas.add(hilo);
+                                hilo.start();
+                            }
 
                         }
                     }
 
                     if (btnSalta.estaDentro(xDedo,yDedo)){
-                        listaNiveles.get(nivelActual).getJugador().saltar();
+                        servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador().saltar();
 
                     }
                 }
+
                 break;
             }
             case MotionEvent.ACTION_UP:{
                 joystick.actualizarJoyStick((float) (0+(getWidth()*0.1)),getHeight()-300);
+                joystick.setPulsado(false);
                 System.out.println("Levantado");
+                servicio.getListaNiveles().get(servicio.getNivelActual()).getJugador().cambiarVelX(0);
                 break;
             }
         }
@@ -129,20 +149,21 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
         btnSalta = new Boton("Texto",getWidth()-400, getHeight()-300, (float) (getHeight()*0.1), Color.GREEN);
         this.joystick = new Joystick((float) (0+(getWidth()*0.1)),getHeight()-300,(float) (getHeight()*0.20));
 
-
-
-
         hilo = new HiloJuego(this);
         hilo.setRun(true);
         hilo.start();
-        this.hiloGravedad = new HiloGravedad(listaNiveles.get(nivelActual).getJugador(),this);
+        this.hiloGravedad = new HiloGravedad(this);
         hiloGravedad.start();
-        timer = new TimerSaltando(listaNiveles.get(nivelActual).getJugador());
+        timer = new TimerSaltando(this);
         timer.start();
-        for (Trampa t: listaNiveles.get(nivelActual).getListaTrampas()) {
+        for (Trampa t: servicio.getListaNiveles().get(servicio.getNivelActual()).getListaTrampas()) {
             HiloTrampa hilo = new HiloTrampa(t,this);
+            hiloTrampas.add(hilo);
             hilo.start();
         }
+
+        HiloMovHor hilomov = new HiloMovHor(this);
+        hilomov.start();
 
     }
 
@@ -159,25 +180,6 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
-    public float getxInicial() {
-        return xInicial;
-    }
-
-    public float getyInicial() {
-        return yInicial;
-    }
-
-    public ArrayList<Nivel> getListaNiveles() {
-        return listaNiveles;
-    }
-
-    public int getNivelActual() {
-        return nivelActual;
-    }
-
-    public ArrayList<PlataformaRect> getListaPlataformas(){
-        return listaNiveles.get(nivelActual).getListaPlataformas();
-    }
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
@@ -194,5 +196,15 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+    public ServicioJuego getServicio() {
+        return servicio;
+    }
 
+    public ArrayList<HiloTrampa> getHiloTrampas() {
+        return hiloTrampas;
+    }
+
+    public ArrayList<HiloProyectil> getHiloProyectiles() {
+        return hiloProyectiles;
+    }
 }

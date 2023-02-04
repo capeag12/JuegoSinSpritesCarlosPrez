@@ -18,9 +18,13 @@ public class Jugador extends Personaje {
         jugando = true;
     }
 
-    @Override
-    public void moverPersonaje(float desX) {
-        this.setX(this.getX()+desX);
+
+    public void moverPersonaje() {
+        this.setX(this.getX()+velocidadX);
+    }
+
+    public void cambiarVelX(float velX){
+        this.velocidadX = velX;
     }
 
 

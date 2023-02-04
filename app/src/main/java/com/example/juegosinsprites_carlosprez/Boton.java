@@ -30,6 +30,7 @@ public class Boton extends Control {
     public void dibujarControl(Canvas c){
         Paint p = new Paint();
         p.setColor(color);
+        p.setAlpha(80);
         c.drawCircle(this.getX(), this.getY(),this.getRadio(), p);
     }
 

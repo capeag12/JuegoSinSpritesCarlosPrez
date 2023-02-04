@@ -3,26 +3,27 @@ package com.example.juegosinsprites_carlosprez;
 import android.graphics.Rect;
 
 public class HiloGravedad extends Thread{
-    private Jugador jugador;
+
     private PantallaJuego pantalla;
     private boolean jugando;
+    private Jugador jugador;
 
-    public HiloGravedad(Jugador jugador, PantallaJuego pantalla) {
-        this.jugador = jugador;
+    public HiloGravedad(PantallaJuego pantalla) {
         jugando = true;
         this.pantalla = pantalla;
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         super.run();
         while(jugando == true){
-            if (jugador.getEstado()== Estado.CAYENDO){
+            jugador = this.pantalla.getServicio().getListaNiveles().get(pantalla.getServicio().getNivelActual()).getJugador();
+            if (jugador.getEstado()== Estado.CAYENDO || jugador.getEstado()== Estado.PARADO){
                 try {
                     boolean avanzar = true;
-                    for (PlataformaRect p: pantalla.getListaPlataformas()){
-                        if (jugador.getX() > p.getX() && (jugador.getX()+jugador.getWidth())<(p.getX()+p.getAnchura())
-                                && (jugador.getY()+ jugador.getHeight())>= p.getY() ){
+                    for (PlataformaRect p: this.pantalla.getServicio().getListaNiveles().get(pantalla.getServicio().getNivelActual()).getListaPlataformas()){
+                        if (jugador.getX() >= p.getX() && (jugador.getX()+jugador.getWidth())<=(p.getX()+p.getAnchura())
+                                && ((jugador.getY()  + jugador.getHeight())>= p.getY()) && (jugador.getY()<=p.getY()) ){
                             avanzar = false;
                             jugador.setEstado(Estado.PARADO);
                         }
@@ -37,7 +38,8 @@ public class HiloGravedad extends Thread{
                     throw new RuntimeException(e);
                 }
             }
-            else if(jugador.getEstado()==Estado.SALTANDO){
+            if(jugador.getEstado()==Estado.SALTANDO ){
+                System.out.println(jugador.getEstado());
                 try {
                     this.jugador.setVelocidadY(-10);
                     this.jugador.modificarY();
@@ -46,6 +48,11 @@ public class HiloGravedad extends Thread{
                     throw new RuntimeException(e);
                 }
             }
+
+            if (jugador.getY()>pantalla.getHeight() || (jugador.getX()+jugador.getWidth()) > pantalla.getWidth() || jugador.getX() < 0){
+                pantalla.getServicio().eliminarJugador();
+            }
+
         }
     }
 

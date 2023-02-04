@@ -44,7 +44,7 @@ public abstract class Personaje {
         this.height = height;
     }
 
-    public abstract void moverPersonaje(float desX);
+
 
     public abstract void dibujarPersonaje(Canvas c);
 }

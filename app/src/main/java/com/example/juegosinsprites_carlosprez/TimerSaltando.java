@@ -5,14 +5,17 @@ import java.util.TimerTask;
 
 public class TimerSaltando extends Thread {
     private Jugador jugador;
+    private PantallaJuego pantalla;
 
-    public TimerSaltando(Jugador jugador) {
-        this.jugador = jugador;
+    public TimerSaltando(PantallaJuego p) {
+        this.pantalla = p;
     }
 
     @Override
     public void run() {
-        while (jugador.isJugando() == true){
+
+        while (true){
+            jugador = pantalla.getServicio().getListaNiveles().get(pantalla.getServicio().getNivelActual()).getJugador();
             if (jugador.getEstado()==Estado.SALTANDO){
                 try {
                     sleep(400);
@@ -25,6 +28,7 @@ public class TimerSaltando extends Thread {
 
 
         }
+
 
 
 

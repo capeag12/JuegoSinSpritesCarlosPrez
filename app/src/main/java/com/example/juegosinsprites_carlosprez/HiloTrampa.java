@@ -3,6 +3,8 @@ package com.example.juegosinsprites_carlosprez;
 public class HiloTrampa extends Thread{
     private Trampa trampa;
     private PantallaJuego pantalla;
+    private Nivel nivelActual;
+    public boolean continuar = true;
 
     public HiloTrampa(Trampa trampa, PantallaJuego pantalla) {
         this.trampa = trampa;
@@ -13,11 +15,21 @@ public class HiloTrampa extends Thread{
     public void run() {
         super.run();
 
-        while (true){
+        while (continuar==true){
+            nivelActual = pantalla.getServicio().getListaNiveles().get(pantalla.getServicio().getNivelActual());
             try {
                 Proyectil p = trampa.disparar();
-                pantalla.getListaNiveles().get(pantalla.getNivelActual()).getListaProyectiles().add(p);
+                synchronized (nivelActual.getListaProyectiles()){
+                    nivelActual.getListaProyectiles().add(p);
+                }
+
+
+
                 HiloProyectil hiloP = new HiloProyectil(p,pantalla);
+                synchronized (pantalla.getHiloProyectiles()){
+                    pantalla.getHiloProyectiles().add(hiloP);
+                }
+
                 hiloP.start();
                 sleep(1500);
 
@@ -25,6 +37,13 @@ public class HiloTrampa extends Thread{
                 throw new RuntimeException(e);
             }
         }
+
+        if (nivelActual.getListaTrampas()!=null){
+            synchronized (nivelActual.getListaTrampas()){
+                nivelActual.getListaTrampas().remove(trampa);
+            }
+        }
+
 
 
     }

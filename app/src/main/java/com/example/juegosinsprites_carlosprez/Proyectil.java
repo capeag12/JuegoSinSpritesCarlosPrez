@@ -4,15 +4,22 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import java.util.Objects;
+
 public class Proyectil {
+    private static int idAutoNum = 0;
+
+    private int id;
     private float x,y,radio, desX, desY;
 
     public Proyectil(float x, float y, float radio, float desX, float desY) {
+        id = idAutoNum;
         this.x = x;
         this.y = y;
         this.radio = radio;
         this.desX = desX;
         this.desY = desY;
+        idAutoNum++;
     }
 
     public float getX() {
@@ -61,4 +68,16 @@ public class Proyectil {
         else return false;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Proyectil proyectil = (Proyectil) o;
+        return id == proyectil.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
