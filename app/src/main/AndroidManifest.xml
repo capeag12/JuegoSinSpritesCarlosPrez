@@ -12,7 +12,16 @@
         android:theme="@style/Theme.JuegoSinSpritesCarlosPérez"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.ActivityClasificacion"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ActivityRegistrarResultado"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ActivityJuegp"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.MainActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
