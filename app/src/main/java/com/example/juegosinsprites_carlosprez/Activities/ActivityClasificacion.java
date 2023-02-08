@@ -28,6 +28,7 @@ public class ActivityClasificacion extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         bbdd = new PuntuacionesDAO(this);
+        bbdd.getWritableDatabase();
         ArrayList<Puntuacion> listaPuntuaciones = bbdd.devolverPuntuaciones();
         layoutManager = new LinearLayoutManager(this);
         adapterPuntuaciones = new AdapterPuntuaciones(listaPuntuaciones,this);

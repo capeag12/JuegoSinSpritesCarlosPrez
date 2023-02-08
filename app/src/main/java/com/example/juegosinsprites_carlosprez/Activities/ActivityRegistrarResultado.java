@@ -14,6 +14,7 @@ import com.example.juegosinsprites_carlosprez.databinding.ActivityRegistrarResul
 
 public class ActivityRegistrarResultado extends AppCompatActivity {
     private ActivityRegistrarResultadoBinding binding;
+
     private ServicioJuego s;
     private PuntuacionesDAO bbdd;
     @Override
@@ -22,6 +23,7 @@ public class ActivityRegistrarResultado extends AppCompatActivity {
         binding = ActivityRegistrarResultadoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         s = ServicioJuego.getInstance();
         binding.txtNumEliminaciones.setText("Te han eliminado "+s.getNumCaidas()+" veces");
@@ -30,7 +32,7 @@ public class ActivityRegistrarResultado extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String nombre = binding.editTextTextPersonName.getText().toString();
-                Puntuacion p = new Puntuacion(nombre,s.getNumCaidas());
+                Puntuacion p = new Puntuacion(nombre,s.getNumCaidas()-1);
                 bbdd.insertarPuntuación(p);
 
                 Intent i = new Intent(ActivityRegistrarResultado.this, ActivityClasificacion.class);
@@ -39,6 +41,17 @@ public class ActivityRegistrarResultado extends AppCompatActivity {
 
             }
         });
+
+        binding.button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityRegistrarResultado.this, ActivityClasificacion.class);
+                finishAffinity();
+                startActivity(i);
+            }
+        });
+
+
     }
 
     @Override

@@ -21,7 +21,7 @@ public class PuntuacionesDAO extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE \"Puntuacion\" (\n" +
                 "\t\"Nombre\"\tTEXT NOT NULL,\n" +
-                "\t\"Puntuación\"\tINTEGER NOT NULL\n" +
+                "\t\"Puntuación\"\tINTEGER\n" +
                 ")");
 
         db.execSQL("INSERT INTO Puntuacion(Nombre, Puntuación) \n" +

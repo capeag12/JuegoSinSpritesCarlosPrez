@@ -39,8 +39,12 @@ public class Trigger {
 
     public boolean puntoAlcanzado(Jugador jugador){
         boolean alcanzado = false;
-        if (((jugador.getX()+jugador.getWidth())>= this.x) && (jugador.getX()<(this.x+this.width)) && (jugador.getY() > (this.y-height)) ){
-            alcanzado = true;
+        Rect rectJugador = new Rect();
+        rectJugador.set((int) jugador.getX(), (int) jugador.getY(), (int) (jugador.getX()+ jugador.getWidth()), (int) (jugador.getY()+jugador.getHeight()));
+        Rect rectTrigger = new Rect();
+        rectTrigger.set((int) getX(), (int) getY(), (int) (getX()+ getWidth()), (int) (getY()+getHeight()));
+        if (Rect.intersects(rectJugador,rectTrigger)){
+            alcanzado=true;
         }
         return alcanzado;
     }
