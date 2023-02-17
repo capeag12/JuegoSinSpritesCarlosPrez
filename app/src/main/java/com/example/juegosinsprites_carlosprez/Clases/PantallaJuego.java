@@ -131,6 +131,8 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
                             boolean pasado = this.servicio.pasarNivel();
                             if (pasado == false){
                                 hilo.finalizar();
+                                cancionJuego.stop();
+                                cancionJuego.release();
                                 Intent intent = new Intent(getContext(), ActivityRegistrarResultado.class);
                                 Activity act = (Activity) getContext();
                                 act.finishAffinity();
