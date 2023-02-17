@@ -13,7 +13,9 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
+import com.example.juegosinsprites_carlosprez.Activities.ActivityJuegp;
 import com.example.juegosinsprites_carlosprez.Activities.ActivityRegistrarResultado;
+import com.example.juegosinsprites_carlosprez.Activities.MainActivity;
 import com.example.juegosinsprites_carlosprez.R;
 
 import java.util.ArrayList;
@@ -132,7 +134,6 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
                             if (pasado == false){
                                 hilo.finalizar();
                                 cancionJuego.stop();
-                                cancionJuego.release();
                                 Intent intent = new Intent(getContext(), ActivityRegistrarResultado.class);
                                 Activity act = (Activity) getContext();
                                 act.finishAffinity();
@@ -221,6 +222,10 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
 
             }
         }
+        if (cancionJuego.isPlaying()){
+            cancionJuego.stop();
+        }
+        cancionJuego.release();
         hiloGravedad.finalizar();
         hilomov.finalizar();
 
@@ -237,4 +242,6 @@ public class PantallaJuego extends SurfaceView implements SurfaceHolder.Callback
     public ArrayList<HiloProyectil> getHiloProyectiles() {
         return hiloProyectiles;
     }
+
+
 }
