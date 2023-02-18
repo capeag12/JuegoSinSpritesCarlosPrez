@@ -1,4 +1,4 @@
-package com.example.juegosinsprites_carlosprez.Clases;
+package com.example.juegosinsprites_carlosprez.Clases.POJOS;
 
 import java.util.ArrayList;
 

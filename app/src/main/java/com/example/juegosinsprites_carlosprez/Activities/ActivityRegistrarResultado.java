@@ -3,14 +3,13 @@ package com.example.juegosinsprites_carlosprez.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.example.juegosinsprites_carlosprez.Clases.Puntuacion;
-import com.example.juegosinsprites_carlosprez.Clases.PuntuacionesDAO;
-import com.example.juegosinsprites_carlosprez.Clases.ServicioJuego;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.Puntuacion;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.PuntuacionesDAO;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.ServicioJuego;
 import com.example.juegosinsprites_carlosprez.databinding.ActivityRegistrarResultadoBinding;
 
 public class ActivityRegistrarResultado extends AppCompatActivity {

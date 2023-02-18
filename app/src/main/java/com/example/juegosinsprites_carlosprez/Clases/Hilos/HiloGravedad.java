@@ -1,4 +1,9 @@
-package com.example.juegosinsprites_carlosprez.Clases;
+package com.example.juegosinsprites_carlosprez.Clases.Hilos;
+
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.Estado;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.Jugador;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.PantallaJuego;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.PlataformaRect;
 
 public class HiloGravedad extends Thread{
 

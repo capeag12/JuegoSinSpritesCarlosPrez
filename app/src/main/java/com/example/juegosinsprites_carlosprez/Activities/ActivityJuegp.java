@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.example.juegosinsprites_carlosprez.Clases.HiloJuego;
-import com.example.juegosinsprites_carlosprez.Clases.PantallaJuego;
+import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloJuego;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.PantallaJuego;
 
 public class ActivityJuegp extends AppCompatActivity {
 

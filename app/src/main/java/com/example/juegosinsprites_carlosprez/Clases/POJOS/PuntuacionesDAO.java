@@ -1,4 +1,4 @@
-package com.example.juegosinsprites_carlosprez.Clases;
+package com.example.juegosinsprites_carlosprez.Clases.POJOS;
 
 import android.content.ContentValues;
 import android.content.Context;

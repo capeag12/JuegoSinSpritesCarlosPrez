@@ -1,4 +1,7 @@
-package com.example.juegosinsprites_carlosprez.Clases;
+package com.example.juegosinsprites_carlosprez.Clases.Hilos;
+
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.Jugador;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.PantallaJuego;
 
 public class HiloMovHor extends Thread{
     private PantallaJuego pantallaJuego;

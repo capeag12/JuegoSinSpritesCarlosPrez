@@ -7,10 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.example.juegosinsprites_carlosprez.Clases.AdapterPuntuaciones;
-import com.example.juegosinsprites_carlosprez.Clases.Puntuacion;
-import com.example.juegosinsprites_carlosprez.Clases.PuntuacionesDAO;
-import com.example.juegosinsprites_carlosprez.R;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.AdapterPuntuaciones;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.Puntuacion;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.PuntuacionesDAO;
 import com.example.juegosinsprites_carlosprez.databinding.ActivityClasificacionBinding;
 
 import java.util.ArrayList;

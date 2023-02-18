@@ -1,4 +1,4 @@
-package com.example.juegosinsprites_carlosprez.Clases;
+package com.example.juegosinsprites_carlosprez.Clases.POJOS;
 
 public class TimerSaltando extends Thread {
     private Jugador jugador;

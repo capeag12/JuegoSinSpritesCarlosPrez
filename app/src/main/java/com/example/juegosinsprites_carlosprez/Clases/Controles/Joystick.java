@@ -1,4 +1,4 @@
-package com.example.juegosinsprites_carlosprez.Clases;
+package com.example.juegosinsprites_carlosprez.Clases.Controles;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

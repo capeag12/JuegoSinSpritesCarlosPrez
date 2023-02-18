@@ -1,7 +1,9 @@
-package com.example.juegosinsprites_carlosprez.Clases;
+package com.example.juegosinsprites_carlosprez.Clases.Hilos;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
+
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.PantallaJuego;
 
 public class HiloJuego extends Thread{
     private SurfaceHolder holder;

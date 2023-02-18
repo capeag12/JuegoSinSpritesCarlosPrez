@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.example.juegosinsprites_carlosprez.Clases.ServicioJuego;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.ServicioJuego;
 import com.example.juegosinsprites_carlosprez.R;
 import com.example.juegosinsprites_carlosprez.databinding.ActivityMainBinding;
 

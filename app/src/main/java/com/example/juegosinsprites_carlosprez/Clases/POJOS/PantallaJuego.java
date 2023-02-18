@@ -1,4 +1,4 @@
-package com.example.juegosinsprites_carlosprez.Clases;
+package com.example.juegosinsprites_carlosprez.Clases.POJOS;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,9 +13,14 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.example.juegosinsprites_carlosprez.Activities.ActivityJuegp;
 import com.example.juegosinsprites_carlosprez.Activities.ActivityRegistrarResultado;
-import com.example.juegosinsprites_carlosprez.Activities.MainActivity;
+import com.example.juegosinsprites_carlosprez.Clases.Controles.Boton;
+import com.example.juegosinsprites_carlosprez.Clases.Controles.Joystick;
+import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloGravedad;
+import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloJuego;
+import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloMovHor;
+import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloProyectil;
+import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloTrampa;
 import com.example.juegosinsprites_carlosprez.R;
 
 import java.util.ArrayList;
