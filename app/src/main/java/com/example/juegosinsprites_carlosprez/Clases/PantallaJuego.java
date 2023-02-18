@@ -1,4 +1,4 @@
-package com.example.juegosinsprites_carlosprez.Clases.POJOS;
+package com.example.juegosinsprites_carlosprez.Clases;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +21,12 @@ import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloJuego;
 import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloMovHor;
 import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloProyectil;
 import com.example.juegosinsprites_carlosprez.Clases.Hilos.HiloTrampa;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.Plataforma;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.Proyectil;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.ServicioJuego;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.SoundPlayer;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.TimerSaltando;
+import com.example.juegosinsprites_carlosprez.Clases.POJOS.Trampa;
 import com.example.juegosinsprites_carlosprez.R;
 
 import java.util.ArrayList;

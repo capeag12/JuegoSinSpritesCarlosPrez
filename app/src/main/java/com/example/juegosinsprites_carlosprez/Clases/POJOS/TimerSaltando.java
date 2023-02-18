@@ -1,5 +1,7 @@
 package com.example.juegosinsprites_carlosprez.Clases.POJOS;
 
+import com.example.juegosinsprites_carlosprez.Clases.PantallaJuego;
+
 public class TimerSaltando extends Thread {
     private Jugador jugador;
     private PantallaJuego pantalla;

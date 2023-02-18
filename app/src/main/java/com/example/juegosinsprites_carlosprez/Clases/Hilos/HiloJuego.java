@@ -3,7 +3,7 @@ package com.example.juegosinsprites_carlosprez.Clases.Hilos;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-import com.example.juegosinsprites_carlosprez.Clases.POJOS.PantallaJuego;
+import com.example.juegosinsprites_carlosprez.Clases.PantallaJuego;
 
 public class HiloJuego extends Thread{
     private SurfaceHolder holder;

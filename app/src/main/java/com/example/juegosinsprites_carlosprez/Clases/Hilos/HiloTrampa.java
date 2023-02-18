@@ -1,7 +1,7 @@
 package com.example.juegosinsprites_carlosprez.Clases.Hilos;
 
 import com.example.juegosinsprites_carlosprez.Clases.POJOS.Nivel;
-import com.example.juegosinsprites_carlosprez.Clases.POJOS.PantallaJuego;
+import com.example.juegosinsprites_carlosprez.Clases.PantallaJuego;
 import com.example.juegosinsprites_carlosprez.Clases.POJOS.Proyectil;
 import com.example.juegosinsprites_carlosprez.Clases.POJOS.Trampa;
 
